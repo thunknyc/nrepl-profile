@@ -14,7 +14,7 @@ nREPL support for [thunknyc/profile](http://github.com/thunknyc/profile).
 * `(require 'nrepl-profile)` after moving `nrepl-profile.el` somewhere Emacs can see it.
 * `C-c M-=` toggles profiling status.
 * `C-c M--` displays profiling data to `*err*`.
-* `C-c M-_` clears collected profiling datw.
+* `C-c M-_` clears collected profiling data.
 
 ## License
 
