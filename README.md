@@ -9,6 +9,13 @@ nREPL support for [thunknyc/profile](http://github.com/thunknyc/profile).
 * Write a `plugin.clj` file to obviate the need for thinking about contents of bullet point supra.
 * Package the elisp and make it accessible from MELPA.
 
+## Emacs
+
+* `(require 'nrepl-profile)` after moving `nrepl-profile.el` somewhere Emacs can see it.
+* `C-c M-=` toggle profiling status
+* `C-c M--` display profiling data to *err*
+* `C-c M-_` clear collected profiling datw
+
 ## License
 
 Copyright © 2014 Edwin Watkeys
