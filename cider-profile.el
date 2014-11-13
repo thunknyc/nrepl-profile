@@ -93,7 +93,6 @@ point, prompts for a var."
      (define-key clojure-mode-map (kbd "C-c M-_") 'cider-profile-clear)
      (define-key clojure-mode-map (kbd "C-c M--") 'cider-profile-summary)))
 
-
 (provide 'cider-profile)
 
 ;;; cider-profile.el ends here
