@@ -28,6 +28,8 @@
 ;; This package augments CIDER to provide coarse-grained interactive
 ;; profiling support.
 
+;;; Code:
+
 (require 'cider)
 
 ;;;###autoload
@@ -86,6 +88,7 @@ point, prompts for a var."
     '()))
   query)
 
+;;;###autoload
 (define-minor-mode cider-profile-mode
   "Toggle cider-profile-mode."
   nil
