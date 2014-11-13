@@ -77,11 +77,11 @@ point, prompts for a var."
 ;;;###autoload
 (eval-after-load 'clojure-mode
   '(progn
-     (define-key clojure-mode-map (kbd "C-c M-=") 'nrepl-profile-toggle)
-     (define-key clojure-mode-map (kbd "C-c M-_") 'nrepl-profile-clear)
-     (define-key clojure-mode-map (kbd "C-c M--") 'nrepl-profile-summary)))
+     (define-key clojure-mode-map (kbd "C-c M-=") 'cider-profile-toggle)
+     (define-key clojure-mode-map (kbd "C-c M-_") 'cider-profile-clear)
+     (define-key clojure-mode-map (kbd "C-c M--") 'cider-profile-summary)))
 
 
-(provide 'nrepl-profile)
+(provide 'cider-profile)
 
-;;; nrepl-profile.el ends here
+;;; cider-profile.el ends here
