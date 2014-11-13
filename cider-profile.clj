@@ -1,4 +1,4 @@
-;;; nrepl-profile.el --- nrepl support for thunknyc/profile -*- lexical-binding: t -*-
+;;; cider-profile.el --- CIDER support for thunknyc/nrepl-profile -*- lexical-binding: t -*-
 
 ;; Copyright © 2014 Edwin Watkeys
 ;;
@@ -21,7 +21,7 @@
 
 (require 'cider)
 
-(defun nrepl-profile-toggle (query)
+(defun cider-profile-toggle (query)
   "Toggle profiling for the given QUERY.
 Defaults to the symbol at point.  With prefix arg or no symbol at
 point, prompts for a var."
@@ -49,7 +49,7 @@ point, prompts for a var."
          '()))))
    query))
 
-(defun nrepl-profile-summary (query)
+(defun cider-profile-summary (query)
   "Display a summary of currently collected profile data."
   (interactive "P")
   (cider-ensure-op-supported "profile-summary")
@@ -58,7 +58,7 @@ point, prompts for a var."
    (cider-interactive-eval-handler (current-buffer)))
   query)
 
-(defun nrepl-profile-clear (query)
+(defun cider-profile-clear (query)
   "Clear any collected profile data."
   (interactive "P")
   (cider-ensure-op-supported "clear-profile")
