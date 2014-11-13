@@ -30,6 +30,7 @@
 
 (require 'cider)
 
+;;;###autoload
 (defun cider-profile-toggle (query)
   "Toggle profiling for the given QUERY.
 Defaults to the symbol at point.  With prefix arg or no symbol at
@@ -58,6 +59,7 @@ point, prompts for a var."
          '()))))
    query))
 
+;;;###autoload
 (defun cider-profile-summary (query)
   "Display a summary of currently collected profile data."
   (interactive "P")
@@ -67,6 +69,7 @@ point, prompts for a var."
    (cider-interactive-eval-handler (current-buffer)))
   query)
 
+;;;###autoload
 (defun cider-profile-clear (query)
   "Clear any collected profile data."
   (interactive "P")
