@@ -3,6 +3,10 @@
 ;; Copyright © 2014 Edwin Watkeys
 ;;
 ;; Author: Edwin Watkeys <edw@poseur.com>
+;; Version: 0.1.0
+;; Package-Requires: ((cider "0.8.0"))
+;; Keywords: cider, clojure, profiling
+;; URL: http://github.com/thunknyc/nrepl-profile
 
 ;; This program is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -18,6 +22,11 @@
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ;; This file is not part of GNU Emacs.
+
+;;; Commentary.
+
+;; This package augments CIDER to provide coarse-grained interactive
+;; profiling support.
 
 (require 'cider)
 
