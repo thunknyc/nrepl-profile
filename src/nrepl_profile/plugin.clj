@@ -2,7 +2,7 @@
   (:require [clojure.java.io :as io]))
 
 (defn- version []
-  (let [v (-> (io/resource "nrepl-profile/nrepl-profile/project.clj")
+  (let [v (-> (io/resource "META-INF/leiningen/thunknyc/nrepl-profile/project.clj")
               slurp
               read-string
               (nth 2))]
@@ -15,7 +15,7 @@
   (-> project
       (update-in [:dependencies]
                  (fnil into [])
-                 [['nrepl-profile (version)]])
+                 [['thunknyc/nrepl-profile (version)]])
       (update-in [:repl-options :nrepl-middleware]
                  (fnil into [])
-                 '[nrepl-profile.core/wrap-refactor])))
+                 '[nrepl-profile.core/wrap-profile])))
