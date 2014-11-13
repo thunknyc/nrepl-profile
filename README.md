@@ -2,19 +2,22 @@
 
 nREPL support for [thunknyc/profile](http://github.com/thunknyc/profile).
 
-## TODO
+## Installation
 
-* Write a README.
-* Show folks how to add the right things to their `${HOME}/.lein/profile.clj`. (Basically: add `[thunknyc/nrepl-profile "0.1.0-SNAPSHOT"]` to `:dependencies` and `{:nrepl-middleware [nrepl-profile.core/wrap-profile]}` to `:dependencies` in your `:user` profile.)
-* Write a `plugin.clj` file to obviate the need for thinking about contents of bullet point supra.
-* Package the elisp and make it accessible from MELPA.
+Add `[thunknyc/nrepl-profile "0.1.0-SNAPSHOT"]` as a plugin in your `:user` profile inside `${HOME}/.lein/profiles.clj`.
 
-## Emacs
+Stick `cider-profile.el` somewhere emacs can see it and then `(require 'cider-profile)` inside your `${HOME}/.emacs`, `${HOME}/.emacs.d/init.el`, whatever.
 
-* `(require 'nrepl-profile)` after moving `nrepl-profile.el` somewhere Emacs can see it.
+## Keybindings
+
 * `C-c M-=` toggles profiling status.
 * `C-c M--` displays profiling data to `*err*`.
 * `C-c M-_` clears collected profiling data.
+
+## TODO
+
+* Write a README.
+* Package the elisp and make it accessible from MELPA.
 
 ## License
 
