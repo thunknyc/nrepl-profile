@@ -1,12 +1,23 @@
 # nrepl-profile
 
-nREPL support for [thunknyc/profile](http://github.com/thunknyc/profile).
+nREPL and CIDER support for
+[thunknyc/profile](http://github.com/thunknyc/profile).
 
 ## Installation
 
-Add `[thunknyc/nrepl-profile "0.1.0-SNAPSHOT"]` as a plugin in your `:user` profile inside `${HOME}/.lein/profiles.clj`.
+Add `[thunknyc/nrepl-profile "0.1.0-SNAPSHOT"]` to the vector
+associated with the `:plugins` key of your `:user` profile inside
+`${HOME}/.lein/profiles.clj`. Schematically, like this:
 
-Stick `cider-profile.el` somewhere emacs can see it and then `(require 'cider-profile)` inside your `${HOME}/.emacs`, `${HOME}/.emacs.d/init.el`, whatever.
+```clojure
+{:user {:plugins [[thunknyc/nrepl-profile "0.1.0-SNAPSHOT"]]}}
+```
+
+Obviously the plug-in for CIDER needs to be in there too.
+
+For Emacs, stick `cider-profile.el` somewhere accessible and add
+`(require 'cider-profile)` to your `${HOME}/.emacs`,
+`${HOME}/.emacs.d/init.el`, whatever.
 
 ## Keybindings
 
@@ -16,7 +27,7 @@ Stick `cider-profile.el` somewhere emacs can see it and then `(require 'cider-pr
 
 ## TODO
 
-* Write a README.
+* Write a better README.
 * Package the elisp and make it accessible from MELPA.
 
 ## License
