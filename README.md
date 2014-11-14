@@ -3,6 +3,8 @@
 nREPL and CIDER support for
 [thunknyc/profile](http://github.com/thunknyc/profile).
 
+[![Screenshot](https://raw.github.com/thunknyc/nrepl-profile/master/doc/profile-screenshot.png]
+
 ## Introduction
 
 Profiling is a rich and varied field of human endeavour. I encourage
