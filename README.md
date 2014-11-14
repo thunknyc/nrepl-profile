@@ -21,6 +21,8 @@ package may be just what the doctor ordered.
 
 ## Installation
 
+[![MELPA](http://melpa.org/packages/cider-profile-badge.svg)](http://melpa.org/#/cider-profile)
+
 Add `[thunknyc/nrepl-profile "0.1.0-SNAPSHOT"]` to the vector
 associated with the `:plugins` key of your `:user` profile inside
 `${HOME}/.lein/profiles.clj`. Schematically, like this:
