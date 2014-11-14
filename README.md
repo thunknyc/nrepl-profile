@@ -41,11 +41,6 @@ For Emacs, stick `cider-profile.el` somewhere accessible and add
 * `C-c M--` displays profiling data to `*err*`.
 * `C-c M-_` clears collected profiling data.
 
-## TODO
-
-* Write a better README.
-* Package the elisp and make it accessible from MELPA.
-
 ## License
 
 Copyright © 2014 Edwin Watkeys

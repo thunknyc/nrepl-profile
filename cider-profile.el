@@ -1,4 +1,4 @@
-;;; cider-profile.el --- CIDER support for thunknyc/nrepl-profile -*- lexical-binding: t -*-
+;;; cider-profile.el --- CIDER profiling support -*- lexical-binding: t -*-
 
 ;; Copyright © 2014 Edwin Watkeys
 ;;
@@ -23,10 +23,57 @@
 
 ;; This file is not part of GNU Emacs.
 
-;;; Commentary.
+;;; Commentary:
 
 ;; This package augments CIDER to provide coarse-grained interactive
 ;; profiling support.
+
+;;; Installation:
+
+;; Available as a package in melpa.milkbox.net.
+;;
+;; (add-to-list 'package-archives
+;;              '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;;
+;; M-x package-install cider-profile
+;;
+;; On the Clojure side, add `[thunknyc/nrepl-profile "0.1.0-SNAPSHOT"]`
+;; to the vector associated with the `:plugins` key of your `:user`
+;; profile inside `${HOME}/.lein/profiles.clj`. Schematically, like
+;; this:
+;;
+;; ```clojure
+;; {:user {:plugins [[thunknyc/nrepl-profile "0.1.0-SNAPSHOT"]]}}
+;; ```
+;;
+;; Profiling is a rich and varied field of human endeavour. I encourage
+;; you to consider what you're trying to accomplish by profiling. This
+;; package for CIDER may not be suited to your current needs. What is
+;; nrepl-profile good for? It's intended for interactive, coarse-grained
+;; profiling applications where JVM warm-up and garbage collection are
+;; not concerns. If you are doing numeric computing or writing other
+;; processor-intensive code, I recommend you check out
+;; [Criterium](https://github.com/hugoduncan/criterium).
+;;
+;; On the other hand, if you are primarily concerned about the influence
+;; of JVM-exogenous factors on your code—HTTP requests, SQL queries,
+;; other network- or (possibly) filesystem-accessing operations—then this
+;; package may be just what the doctor ordered.
+
+;;; Usage:
+
+;; Add the following to your `init.el`, `.emacs`, whatever:
+;;
+;; ```
+;; (add-hook 'cider-mode-hook 'cider-profile-mode)
+;; (add-hook 'cider-repl-mode-hook 'cider-profile-mode)
+;; ```
+;;
+;; Cider-profile includes the following keybindings out of the box:
+;;
+;; * `C-c M-=` toggles profiling status.
+;; * `C-c M--` displays profiling data to `*err*`.
+;; * `C-c M-_` clears collected profiling data.
 
 ;;; Code:
 
@@ -92,9 +139,10 @@ point, prompts for a var."
 (define-minor-mode cider-profile-mode
   "Toggle cider-profile-mode."
   nil
-  '(([C-c M-=] . cider-profile-toggle)
-    ([C-c M-_] . cider-profile-clear)
-    ([C-c M--] . cider-profile-summary)))
+  nil
+  `((,(kbd "C-c M-=") . cider-profile-toggle)
+    (,(kbd "C-c M-_") . cider-profile-clear)
+    (,(kbd "C-c M--") . cider-profile-summary)))
 
 (provide 'cider-profile)
 
