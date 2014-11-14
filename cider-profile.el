@@ -75,6 +75,8 @@
 ;; * `C-c M--` displays profiling data to `*err*`.
 ;; * `C-c M-_` clears collected profiling data.
 
+;;; Code:
+
 (require 'cider)
 
 ;;;###autoload
@@ -133,6 +135,7 @@ point, prompts for a var."
     '()))
   query)
 
+;;;###autoload
 (define-minor-mode cider-profile-mode
   "Toggle cider-profile-mode."
   nil
