@@ -89,9 +89,10 @@ point, prompts for a var."
 (define-minor-mode cider-profile-mode
   "Toggle cider-profile-mode."
   nil
-  '(([C-c M-=] . cider-profile-toggle)
-    ([C-c M-_] . cider-profile-clear)
-    ([C-c M--] . cider-profile-summary)))
+  nil
+  `((,(kbd "C-c M-=") . cider-profile-toggle)
+    (,(kbd "C-c M-_") . cider-profile-clear)
+    (,(kbd "C-c M--") . cider-profile-summary)))
 
 (provide 'cider-profile)
 
