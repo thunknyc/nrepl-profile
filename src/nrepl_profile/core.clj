@@ -86,9 +86,3 @@
    {:doc "Clears profile of samples."
     :requires {}
     :returns {"status" "Done"}}}})
-(ns nrepl-profile.core)
-
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
