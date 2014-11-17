@@ -84,14 +84,13 @@
 
 (defn set-max-samples
   [{:keys [max-samples transport] :as msg}]
-  (prn (format "max-samples: %s" max-samples))
   (try (let [max-samples (normalize-max-samples max-samples)]
          (p/set-max-sample-count max-samples)
          (t/send transport
                  (response-for
-                 msg
-                 :status :done
-                 :value (str (p/max-sample-count)))))
+                  msg
+                  :status :done
+                  :value (str (p/max-sample-count)))))
        (catch Exception e  (send-exception e msg transport))))
 
 (defn wrap-profile
