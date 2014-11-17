@@ -41,9 +41,12 @@ For Emacs, stick `cider-profile.el` somewhere accessible and add
 
 ## Keybindings
 
-* `C-c M-=` toggles profiling status.
-* `C-c M--` displays profiling data to `*err*`.
-* `C-c M-_` clears collected profiling data.
+* `C-c =` Toggle profiling of var under point.
+* `C-c _` Clear collected profiling data.
+* `C-c -` Print summary of profiling data to `*err*`.
+* `C-c +` Toggle profiling of namespace.
+* `C-c M-=` Report whether var under point is profiled.
+* `C-c M-+` Read (and, with `C-u`, set) current maximum per-var samples.
 
 ## License
 
