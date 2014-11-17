@@ -59,9 +59,9 @@
 ;; of JVM-exogenous factors on your code—HTTP requests, SQL queries,
 ;; other network- or (possibly) filesystem-accessing operations—then this
 ;; package may be just what the doctor ordered.
-
-;;; Usage:
-
+;;
+;; ## Usage:
+;;
 ;; Add the following to your `init.el`, `.emacs`, whatever:
 ;;
 ;; ```
