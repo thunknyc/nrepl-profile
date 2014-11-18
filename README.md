@@ -7,19 +7,21 @@ nREPL and CIDER support for
 
 ## Introduction
 
-Profiling is a rich and varied field of human endeavour. I encourage
-you to consider what you're trying to accomplish by profiling. This
-package for CIDER may not be suited to your current needs. What is
-nrepl-profile good for? It's intended for interactive, coarse-grained
-profiling applications where JVM warm-up and garbage collection are
-not concerns. If you are doing numeric computing or writing other
-processor-intensive code, I recommend you check out
-[Criterium](https://github.com/hugoduncan/criterium).
+Profiling is a rich and varied field of human endeavour. I
+encourage you to consider what you're trying to accomplish by
+profiling. This package for CIDER may not be suited to your current
+needs. What is nrepl-profile good for? It's intended for
+interactive profiling applications where you do not expect a
+profiling tool to automatically compensate for JVM warm-up and
+garbage collection issues. If you are doing numeric computing or
+writing other purely functional code that can be executed
+repeatedly without unpleasant side effects, I recommend you at the
+very least check out [Criterium](https://github.com/hugoduncan/criterium).
 
-On the other hand, if you are primarily concerned about the influence
-of JVM-exogenous factors on your code—HTTP requests, SQL queries,
-other network- or (possibly) filesystem-accessing operations—then this
-package may be just what the doctor ordered.
+If you are primarily concerned about the influence of JVM-exogenous
+factors on your code—HTTP requests, SQL queries, other network- or
+(possibly) filesystem-accessing operations—then this package may be
+just what the doctor ordered.
 
 ## Installation
 

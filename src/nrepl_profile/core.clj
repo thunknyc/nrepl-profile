@@ -27,6 +27,26 @@
                :value "unbound")))
     (catch Exception e (send-exception e msg transport))))
 
+(defn profile-var-summary
+  [{:keys [ns sym transport] :as msg}]
+  (try
+    (if-let [v (ns-resolve (symbol ns) (symbol sym))]
+      (if-let [table (with-out-str (binding [*err* *out*]
+                                     (p/print-entry-summary)))]
+        (t/send transport
+                (response-for msg
+                              :status :done
+                              :err table))
+        (t/send transport
+                (response-for msg
+                              :status :done
+                              :err (format "No profile data for %s." v))))
+      (t/send transport
+              (response-for msg
+                            :status :done
+                            :value (format "Var %s/%s is not bound." ns sym))))
+    (catch Exception e (send-exception e msg transport))))
+
 (defn profile-summary
   [{:keys [transport] :as msg}]
   (try
@@ -106,6 +126,8 @@
       (is-var-profiled msg)
       "profile-summary"
       (profile-summary msg)
+      "profile-var-summary"
+      (profile-var-summary msg)
       "clear-profile"
       (clear-profile msg)
       "get-max-samples"
@@ -144,6 +166,12 @@
                "ns" "The current namespace"}
     :returns {"status" "Done"
               "value" "'profiled' if profiling enabled, 'unprofiled' if disabled, 'unbound' if ns/sym not bound"}}
+   "profile-var-summary"
+   {:doc "Return profiling data summary for a single var."
+    :requires {"sym" "The symbol to profile"
+               "ns" "The current namespace"}
+    :returns {"status" "Done"
+              "err" "Content of profile summary report"}}
    "profile-summary"
    {:doc "Return profiling data summary."
     :requires {}
