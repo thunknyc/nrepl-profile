@@ -32,7 +32,7 @@
   (try
     (if-let [v (ns-resolve (symbol ns) (symbol sym))]
       (if-let [table (with-out-str (binding [*err* *out*]
-                                     (p/print-entry-summary)))]
+                                     (p/print-entry-summary v)))]
         (t/send transport
                 (response-for msg
                               :status :done
@@ -45,7 +45,7 @@
               (response-for msg
                             :status :done
                             :value (format "Var %s/%s is not bound." ns sym))))
-    (catch Exception e (send-exception e msg transport))))
+    (catch Exception e (prn :e e) (send-exception e msg transport))))
 
 (defn profile-summary
   [{:keys [transport] :as msg}]

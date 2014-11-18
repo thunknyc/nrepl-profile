@@ -1,5 +1,4 @@
 ;;; cider-profile.el --- CIDER profiling support -*- lexical-binding: t -*-
-
 ;; Copyright © 2014 Edwin Watkeys
 ;;
 ;; Author: Edwin Watkeys <edw@poseur.com>
@@ -46,21 +45,23 @@
 ;; {:user {:plugins [[thunknyc/nrepl-profile "0.1.0-SNAPSHOT"]]}}
 ;; ```
 ;;
-;; Profiling is a rich and varied field of human endeavour. I encourage
-;; you to consider what you're trying to accomplish by profiling. This
-;; package for CIDER may not be suited to your current needs. What is
-;; nrepl-profile good for? It's intended for interactive, coarse-grained
-;; profiling applications where JVM warm-up and garbage collection are
-;; not concerns. If you are doing numeric computing or writing other
-;; processor-intensive code, I recommend you check out
-;; [Criterium](https://github.com/hugoduncan/criterium).
+;; Profiling is a rich and varied field of human endeavour. I
+;; encourage you to consider what you're trying to accomplish by
+;; profiling. This package for CIDER may not be suited to your current
+;; needs. What is nrepl-profile good for? It's intended for
+;; interactive profiling applications where you do not expect a
+;; profiling tool to automatically compensate for JVM warm-up and
+;; garbage collection issues. If you are doing numeric computing or
+;; writing other purely functional code that can be executed
+;; repeatedly without unpleasant side effects, I recommend you at the
+;; very least check out [Criterium](https://github.com/hugoduncan/criterium).
 ;;
-;; On the other hand, if you are primarily concerned about the influence
-;; of JVM-exogenous factors on your code—HTTP requests, SQL queries,
-;; other network- or (possibly) filesystem-accessing operations—then this
-;; package may be just what the doctor ordered.
+;; If you are primarily concerned about the influence of JVM-exogenous
+;; factors on your code—HTTP requests, SQL queries, other network- or
+;; (possibly) filesystem-accessing operations—then this package may be
+;; just what the doctor ordered.
 ;;
-;; ## Usage:
+;; Usage:
 ;;
 ;; Add the following to your `init.el`, `.emacs`, whatever:
 ;;
@@ -74,6 +75,7 @@
 ;; * `C-c =` Toggle profiling of var under point.
 ;; * `C-c _` Clear collected profiling data.
 ;; * `C-c -` Print summary of profiling data to `*err*`.
+;; * `C-c M--` Print profiling stats for var under point to `*err*`.
 ;; * `C-c +` Toggle profiling of namespace.
 ;; * `C-c M-=` Report whether var under point is profiled.
 ;; * `C-c M-+` Read (and, with `C-u`, set) current maximum per-var samples.
@@ -208,6 +210,22 @@ point, prompts for a var."
   query)
 
 ;;;###autoload
+(defun cider-profile-var-summary (query)
+  "Display profile data for var under point, prompting if none or
+prefix argument given."
+  (interactive "P")
+  (cider-ensure-op-supported "profile-var-summary")
+  (cider-read-symbol-name
+   "Profile-summary for var: "
+   (lambda (sym)
+     (nrepl-send-request
+      (list "op" "profile-var-summary"
+            "ns" (cider-current-ns)
+            "sym" sym)
+      (cider-interactive-eval-handler (current-buffer)))))
+  query)
+
+;;;###autoload
 (defun cider-profile-clear (query)
   "Clear any collected profile data."
   (interactive "P")
@@ -232,6 +250,7 @@ point, prompts for a var."
   `((,(kbd "C-c =") . cider-profile-toggle)
     (,(kbd "C-c _") . cider-profile-clear)
     (,(kbd "C-c -") . cider-profile-summary)
+    (,(kbd "C-c M--") . cider-profile-var-summary)
     (,(kbd "C-c +") . cider-profile-ns-toggle)
     (,(kbd "C-c M-=") . cider-profile-var-profiledp)
     (,(kbd "C-c M-+") . cider-profile-samples)))
