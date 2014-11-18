@@ -164,7 +164,7 @@ var if none under point or prefix argument is present."
               ((equal value "unprofiled")
                (message (format "not profiling %s." ns)))
               ((equal value "unbound")
-               (message (format "%s/%s is not bound." ns)))))
+               (message (format "%s/%s is not bound." ns sym)))))
       '()
       '()
       '())))
