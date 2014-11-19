@@ -70,19 +70,28 @@
 ;; (add-hook 'cider-repl-mode-hook 'cider-profile-mode)
 ;; ```
 ;;
+;; If you would like to display profiling statistics in the current
+;; repl window instead of in a pop-up window, do the following:
+;;
+;; ```
+;; (setq cider-profile-buffer nil)
+;; ```
+;;
 ;; Cider-profile includes the following keybindings out of the box:
 ;;
-;; * `C-c =` Toggle profiling of var under point.
-;; * `C-c _` Clear collected profiling data.
-;; * `C-c -` Print summary of profiling data to `*err*`.
-;; * `C-c M--` Print profiling stats for var under point to `*err*`.
-;; * `C-c +` Toggle profiling of namespace.
+;; * `C-c =`   Toggle profiling of var under point.
+;; * `C-c +`   Toggle profiling of namespace.
 ;; * `C-c M-=` Report whether var under point is profiled.
-;; * `C-c M-+` Read (and, with `C-u`, set) current maximum per-var samples.
+;; * `C-c M-+` Display (and, with `C-u`, set) current maximum per-var samples.
+;; * `C-c -`   Display summary of profiling data.
+;; * `C-c M--` Display profiling data for var under point.
+;; * `C-c _`   Clear collected profiling data.
 
 ;;; Code:
 
 (require 'cider)
+
+(defconst cider-profile-buffer "*cider-profile*")
 
 ;;;###autoload
 (defun cider-profile-samples (&optional query)
@@ -197,14 +206,26 @@ point, prompts for a var."
          '()))))
    query))
 
+(defun cider-profile-display-stats (stats-response)
+  (let ((table (nrepl-dict-get stats-response "err")))
+    (if cider-profile-buffer
+        (let ((buffer (cider-make-popup-buffer cider-profile-buffer)))
+          (with-current-buffer cider-profile-buffer
+            (let ((inhibit-read-only t)) (insert table)))
+          (display-buffer cider-profile-buffer)
+          (let ((window (get-buffer-window cider-profile-buffer)))
+            (set-window-point window 0)
+            (select-window window)
+            (fit-window-to-buffer window)))
+      (cider-repl-emit-err-output (cider-current-repl-buffer) table))))
+
 ;;;###autoload
 (defun cider-profile-summary (query)
   "Display a summary of currently collected profile data."
   (interactive "P")
   (cider-ensure-op-supported "profile-summary")
-  (nrepl-send-request
-   (list "op" "profile-summary")
-   (cider-interactive-eval-handler (current-buffer)))
+  (cider-profile-display-stats
+   (nrepl-send-request-sync (list "op" "profile-summary")))
   query)
 
 ;;;###autoload
@@ -216,11 +237,11 @@ prefix argument given."
   (cider-read-symbol-name
    "Profile-summary for var: "
    (lambda (sym)
-     (nrepl-send-request
-      (list "op" "profile-var-summary"
-            "ns" (cider-current-ns)
-            "sym" sym)
-      (cider-interactive-eval-handler (current-buffer)))))
+     (cider-profile-display-stats
+      (nrepl-send-request-sync
+       (list "op" "profile-var-summary"
+             "ns" (cider-current-ns)
+             "sym" sym)))))
   query)
 
 ;;;###autoload
