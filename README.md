@@ -41,15 +41,31 @@ For Emacs, stick `cider-profile.el` somewhere accessible and add
 `(require 'cider-profile)` to your `${HOME}/.emacs`,
 `${HOME}/.emacs.d/init.el`, whatever.
 
+Add the following to your `init.el`, `.emacs`, whatever:
+
+```
+(add-hook 'cider-mode-hook 'cider-profile-mode)
+(add-hook 'cider-repl-mode-hook 'cider-profile-mode)
+```
+
+If you would like to display profiling statistics in the current repl
+window instead of in a pop-up window, do the following:
+
+```
+(setq cider-profile-buffer nil)
+```
+
 ## Keybindings
 
-* `C-c =` Toggle profiling of var under point.
-* `C-c _` Clear collected profiling data.
-* `C-c -` Print summary of profiling data to `*err*`.
-* `C-c M--` Print profiling stats for var under point to `*err*`.
-* `C-c +` Toggle profiling of namespace.
+Cider-profile includes the following keybindings out of the box:
+
+* `C-c =`   Toggle profiling of var under point.
+* `C-c +`   Toggle profiling of namespace.
 * `C-c M-=` Report whether var under point is profiled.
-* `C-c M-+` Read (and, with `C-u`, set) current maximum per-var samples.
+* `C-c M-+` Display (and, with `C-u`, set) current maximum per-var samples.
+* `C-c -`   Display summary of profiling data.
+* `C-c M--` Display profiling data for var under point.
+* `C-c _`   Clear collected profiling data.
 
 ## License
 
