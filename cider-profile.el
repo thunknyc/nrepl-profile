@@ -210,10 +210,10 @@ point, prompts for a var."
   (let ((table (nrepl-dict-get stats-response "err")))
     (if cider-profile-buffer
         (let ((buffer (cider-make-popup-buffer cider-profile-buffer)))
-          (with-current-buffer cider-profile-buffer
+          (with-current-buffer buffer
             (let ((inhibit-read-only t)) (insert table)))
-          (display-buffer cider-profile-buffer)
-          (let ((window (get-buffer-window cider-profile-buffer)))
+          (display-buffer buffer)
+          (let ((window (get-buffer-window buffer)))
             (set-window-point window 0)
             (select-window window)
             (fit-window-to-buffer window)))
@@ -225,7 +225,7 @@ point, prompts for a var."
   (interactive "P")
   (cider-ensure-op-supported "profile-summary")
   (cider-profile-display-stats
-   (nrepl-send-request-sync (list "op" "profile-summary")))
+   (nrepl-send-sync-request (list "op" "profile-summary")))
   query)
 
 ;;;###autoload
@@ -238,7 +238,7 @@ prefix argument given."
    "Profile-summary for var: "
    (lambda (sym)
      (cider-profile-display-stats
-      (nrepl-send-request-sync
+      (nrepl-send-sync-request
        (list "op" "profile-var-summary"
              "ns" (cider-current-ns)
              "sym" sym)))))
