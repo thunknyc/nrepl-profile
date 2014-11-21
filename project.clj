@@ -3,7 +3,7 @@
   :url "http://github.com/thunknyc/nrepl-profile"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[thunknyc/profile "0.5.1"]]
+  :dependencies [[thunknyc/profile "0.5.2"]]
   :exclusions [org.clojure/clojure]
   :profiles {:1.5 {:dependencies [[org.clojure/clojure "1.5.1"]]}
              :1.6 {:dependencies [[org.clojure/clojure "1.6.0"]]}
