@@ -1,5 +1,7 @@
 # nrepl-profile
 
+> ## This functionality has been [integrated into CIDER itself](https://github.com/clojure-emacs/cider/pull/2197). Don't use this project if using a version of CIDER with built-in profiling, as it would cause problems.
+
 nREPL and CIDER support for
 [thunknyc/profile](http://github.com/thunknyc/profile).
 
